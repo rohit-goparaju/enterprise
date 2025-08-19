@@ -4,7 +4,7 @@
         <Console name="ConsoleAppender" target="SYSTEM_OUT">
             <PatternLayout pattern="%highlight{[%level]} %style{%d{DATE}}{blue} [%style{ %location }{blue}]- %msg%n"/>
         </Console>
-        <RollingFile name="DailyRollingFile" filename="logs/enterprise.log" filePattern="logs/enterprise-%d{dd-MM-yyyy}.log">
+        <RollingFile name="DailyRollingFile" fileName="logs/enterprise.log" filePattern="logs/enterprise-%d{dd-MM-yyyy}.log">
         	<patternLayout pattern="[%level] [%d{DATE}] [ %location ] - %msg%n"/>
         	
         	<policies>
