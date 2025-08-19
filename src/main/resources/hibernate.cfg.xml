@@ -22,5 +22,6 @@
         <!-- Automatically create/update schema -->
         <property name="hibernate.hbm2ddl.auto">update</property>
         
+        <mapping class="enterprise.Person"/>
     </session-factory>
 </hibernate-configuration>

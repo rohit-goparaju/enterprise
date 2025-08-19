@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import daos.PersonDAO;
 import enterprise.Person;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -25,8 +26,14 @@ public class PersonServlet extends HttpServlet{
 		String fname = req.getParameter("fname");
 		String lname = req.getParameter("lname");
 		
-		Person person = new Person(0, fname, lname);
+		Person person = new Person();
 
+		person.setFname(fname);
+		person.setLname(lname);
+		
+		PersonDAO personDAO = new PersonDAO();
+		personDAO.addPerson(person);
+		
 		String fullName = fname + " " + lname;
 		
 		//NOT WORKING FOR ROLLING FILE because of the path resolution in tomcat.
