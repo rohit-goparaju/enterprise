@@ -29,9 +29,8 @@ public class PersonServlet extends HttpServlet{
 
 		String fullName = fname + " " + lname;
 		
-		
-		log.info("Welcome " + fullName);
-
+		//NOT WORKING FOR ROLLING FILE because of the path resolution in tomcat.
+		log.error("Welcome " + fullName);
 		
 		req.setAttribute("name", fullName);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("welcome.jsp");
