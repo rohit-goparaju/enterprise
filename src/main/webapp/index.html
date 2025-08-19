@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Enterprise</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet" crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"></script>
+</head>
+<body class="text-bg-dark">
+<div class="container-fluid">
+	<div class="p-5 rounded text-bg-primary">
+		<div class="alert alert-success alert-dismissible fade show text-center">
+			<button data-bs-dismiss="alert" class="btn-close"></button>
+			<h1>Hello welcome</h1>
+		</div>
+		<div>
+			<form action="person" method="get">
+				<label for="fname" id="form-label">First Name:</label>
+				<input type="text" class="form-control" id="fname" name="fname" placeholder="enter first name" required pattern="[A-Za-z]+">
+				<label for="lname" id="form-label">Last Name:</label>
+				<input type="text" class="form-control" id="lname" name="lname" placeholder="enter last name" required pattern="[A-Za-z]+">
+				<button class="btn btn-outline-light mt-4" type="submit">submit</button>
+				<button type="reset" class="btn btn-outline-light mt-4 mx-4">reset</button>
+			</form>
+		</div>
+	</div>
+</div>	
+</body>
+</html>
