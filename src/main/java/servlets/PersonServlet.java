@@ -31,6 +31,7 @@ public class PersonServlet extends HttpServlet{
 		
 		
 		log.info("Welcome " + fullName);
+
 		
 		req.setAttribute("name", fullName);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("welcome.jsp");
