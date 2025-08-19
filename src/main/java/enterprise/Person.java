@@ -2,7 +2,13 @@ package enterprise;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+
+@Entity
 public class Person implements Serializable{
 
 	/**
@@ -10,11 +16,12 @@ public class Person implements Serializable{
 	 */
 	private static final long serialVersionUID = -5848584724462451447L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	private String fname, lname;
 
-	
 	
 	public Person() {
 		super();
