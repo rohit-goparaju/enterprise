@@ -10,10 +10,12 @@ import daos.PersonDAO;
 import enterprise.Person;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+@WebServlet("/PersonServlet")
 public class PersonServlet extends HttpServlet{
 	/**
 	 * 
@@ -44,6 +46,7 @@ public class PersonServlet extends HttpServlet{
 		
 		req.setAttribute("aadhaarNumber", aadhaar);
 		req.setAttribute("people", people);
+		req.setAttribute("greeting", "Congratulations, you are now registered user.");
 		RequestDispatcher dispatcher = req.getRequestDispatcher("welcome.jsp");
 		dispatcher.forward(req, resp);
 	}

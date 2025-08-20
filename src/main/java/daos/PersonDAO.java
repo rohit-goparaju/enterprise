@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import enterprise.Person;
+import jakarta.persistence.EntityNotFoundException;
 
 public class PersonDAO {
 	private static final Logger log = LoggerFactory.getLogger(PersonDAO.class);
@@ -42,10 +43,14 @@ public class PersonDAO {
 		log.info(person+ " person added successfully");
 	}
 	
-	public Person getPerson(int id) {
+	public Person getPerson(long aadhaar) {
 		connectDb();
 		Person person = new Person();
-		session.load(person, id);
+		try {
+			session.load(person, aadhaar);
+		}catch(Exception e) {
+			log.error("Exception while loading Person: " + e.getMessage());
+		}
 		commitAndClose();
 		log.info(person+ " person loaded successfully");
 		return person;
