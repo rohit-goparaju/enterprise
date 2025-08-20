@@ -26,28 +26,35 @@ public class PersonServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String fname = req.getParameter("fname");
-		String lname = req.getParameter("lname");
+		PersonDAO personDAO = new PersonDAO();
 		Long aadhaar = Long.parseLong(req.getParameter("aadhaar"));
 		
-		Person person = new Person();
+		if(req.getParameter("deleteRequest") == null) {
+			String fname = req.getParameter("fname");
+			String lname = req.getParameter("lname");
+			
+			Person person = new Person();
 
-		person.setFname(fname);
-		person.setLname(lname);
-		person.setAadhaar(aadhaar);
-		
-		PersonDAO personDAO = new PersonDAO();
-		personDAO.addPerson(person);
-		
-		//set the correct file path wrt tomcat in rolling file.
-		log.error("Welcome " + fname+ " " + lname);
-		
-		List<Person> people = personDAO.getAllPerson();
-		
-		req.setAttribute("aadhaarNumber", aadhaar);
-		req.setAttribute("people", people);
-		req.setAttribute("greeting", "Congratulations, you are now registered user.");
-		RequestDispatcher dispatcher = req.getRequestDispatcher("welcome.jsp");
-		dispatcher.forward(req, resp);
+			person.setFname(fname);
+			person.setLname(lname);
+			person.setAadhaar(aadhaar);
+			
+			personDAO.addPerson(person);
+			
+			//set the correct file path wrt tomcat in rolling file.
+			log.error("Welcome " + fname+ " " + lname);
+			
+			List<Person> people = personDAO.getAllPerson();
+			
+			req.setAttribute("aadhaarNumber", aadhaar);
+			req.setAttribute("people", people);
+			req.setAttribute("greeting", "Congratulations, you are now registered user.");
+			RequestDispatcher dispatcher = req.getRequestDispatcher("welcome.jsp");
+			dispatcher.forward(req, resp);			
+		}
+		else {
+			personDAO.removePerson(aadhaar);
+			resp.getWriter().write("Deleted aadhaar "+ aadhaar);
+		}
 	}
 }

@@ -28,6 +28,7 @@ public class DuplicatePersonFilter extends HttpFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
 		
 		Long aadhaar = Long.parseLong(request.getParameter("aadhaar"));
 		
@@ -38,12 +39,18 @@ public class DuplicatePersonFilter extends HttpFilter implements Filter {
 		if(person.getFname() == null)
 			chain.doFilter(request, response);
 		else {
-			List<Person> people = personDAO.getAllPerson();
-			request.setAttribute("aadhaarNumber", aadhaar);
-			request.setAttribute("people", people);
-			request.setAttribute("greeting", "Aaadhaar already registered.");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("welcome.jsp");
-			dispatcher.forward(request, response);
+			if(request.getParameter("deleteRequest") == null) {
+				List<Person> people = personDAO.getAllPerson();
+				request.setAttribute("aadhaarNumber", aadhaar);
+				request.setAttribute("people", people);
+				request.setAttribute("greeting", "Aaadhaar already registered.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("welcome.jsp");
+				dispatcher.forward(request, response);
+			}
+			else {
+				personDAO.removePerson(aadhaar);
+				response.getWriter().write("Deleted aadhaar "+ aadhaar);
+			}
 		}
 	}
 

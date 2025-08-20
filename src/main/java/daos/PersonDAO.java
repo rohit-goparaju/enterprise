@@ -65,9 +65,15 @@ public class PersonDAO {
 		return people;
 	}
 	
-	public void removePerson(Person person) {
+	public void removePerson(long aadhaar) {
 		connectDb();
-		session.remove(person);
+		Person person = new Person();
+		try {
+			session.load(person, aadhaar);
+			session.remove(person);			
+		}catch(Exception e) {
+			log.error("Exception while loading Person: " + e.getMessage());
+		}
 		commitAndClose();
 		log.info(person + " person removed successfully");
 	}

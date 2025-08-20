@@ -15,6 +15,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
 	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
 <script src="myScript.js"></script>
 </head>
 <body class="text-bg-dark">
@@ -44,7 +45,8 @@
 									<c:out value="${person.aadhaar } ${person.fname } ${person.lname }"/>
 								</span>
 									<c:if test="${aadhaarNumber == person.aadhaar }">
-										<button class="btn-close text-bg-danger" title="delete person" onclick="sendDeletePerson()"></button>
+										<button id="deleteButton" class="btn-close text-bg-danger" title="delete person" onclick="sendDeletePerson(${person.aadhaar})"></button>
+										<span id="deletedMessage" class="fw-bold text-bg-danger p-2" hidden="true" title="you can register the aadhaar again as a new user"></span>
 									</c:if>
 									<br/>
 							</c:forEach>
