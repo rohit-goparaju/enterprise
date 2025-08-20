@@ -1,10 +1,13 @@
 package daos;
 
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,6 +49,15 @@ public class PersonDAO {
 		commitAndClose();
 		log.info(person+ " person loaded successfully");
 		return person;
+	}
+	
+	public List<Person> getAllPerson(){
+		connectDb();
+		Query<Person> query = session.createQuery("from Person", Person.class);
+		List<Person> people = query.list();
+		commitAndClose();
+		log.info("All records from Person loaded successfully");
+		return people;
 	}
 	
 	public void removePerson(Person person) {

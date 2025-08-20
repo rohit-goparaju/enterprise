@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,24 +23,27 @@ public class PersonServlet extends HttpServlet{
 	public static final Logger log = LoggerFactory.getLogger(PersonServlet.class);
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String fname = req.getParameter("fname");
 		String lname = req.getParameter("lname");
+		Long aadhaar = Long.parseLong(req.getParameter("aadhaar"));
 		
 		Person person = new Person();
 
 		person.setFname(fname);
 		person.setLname(lname);
+		person.setAadhaar(aadhaar);
 		
 		PersonDAO personDAO = new PersonDAO();
 		personDAO.addPerson(person);
 		
-		String fullName = fname + " " + lname;
+		//set the correct file path wrt tomcat in rolling file.
+		log.error("Welcome " + fname+ " " + lname);
 		
-		//NOT WORKING FOR ROLLING FILE because of the path resolution in tomcat.
-		log.error("Welcome " + fullName);
+		List<Person> people = personDAO.getAllPerson();
 		
-		req.setAttribute("name", fullName);
+		req.setAttribute("aadhaarNumber", aadhaar);
+		req.setAttribute("people", people);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("welcome.jsp");
 		dispatcher.forward(req, resp);
 	}

@@ -19,11 +19,13 @@
 			<h1>Hello welcome</h1>
 		</div>
 		<div>
-			<form action="person" method="get">
+			<form action="person" method="post">
 				<label for="fname" id="form-label">First Name:</label>
-				<input type="text" class="form-control" id="fname" name="fname" placeholder="enter first name" required pattern="[A-Za-z]+">
+				<input type="text" class="form-control" id="fname" name="fname" placeholder="enter first name" required pattern="[A-Za-z]+" title="only alphabets allowed, make sure there are no spaces">
 				<label for="lname" id="form-label">Last Name:</label>
-				<input type="text" class="form-control" id="lname" name="lname" placeholder="enter last name" required pattern="[A-Za-z]+">
+				<input type="text" class="form-control" id="lname" name="lname" placeholder="enter last name" required pattern="[A-Za-z]+" title="only alphabets allowed, make sure there are no spaces">
+				<label for="aadhaar" class="form-label">Aadhaar Number:</label>
+				<input type="text" class="form-control" id="aadhaar" name="aadhaar" placeholder="enter aadhaar number" required pattern="[2-9]{1}[0-9]{11}" title="Aadhaar number should not start with 1 and should be 12 digits long">
 				<button class="btn btn-outline-light mt-4" type="submit">submit</button>
 				<button type="reset" class="btn btn-outline-light mt-4 mx-4">reset</button>
 			</form>

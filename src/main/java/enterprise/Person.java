@@ -17,8 +17,7 @@ public class Person implements Serializable{
 	private static final long serialVersionUID = -5848584724462451447L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long aadhaar;
 	
 	private String fname, lname;
 
@@ -27,19 +26,19 @@ public class Person implements Serializable{
 		super();
 	}
 
-	public Person(int id, String fname, String lname) {
+	public Person(long aadhaar, String fname, String lname) {
 		super();
-		this.id = id;
+		this.aadhaar= aadhaar;
 		this.fname = fname;
 		this.lname = lname;
 	}
 
-	public int getId() {
-		return id;
+	public long getAadhaar() {
+		return aadhaar;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setAadhaar(long aadhaar) {
+		this.aadhaar = aadhaar;
 	}
 
 	public String getFname() {
@@ -60,7 +59,7 @@ public class Person implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", fname=" + fname + ", lname=" + lname + "]";
+		return "Person [aadhaar=" + aadhaar + ", fname=" + fname + ", lname=" + lname + "]";
 	}
 	
 }
