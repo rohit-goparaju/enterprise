@@ -49,7 +49,7 @@ public class DuplicatePersonFilter extends HttpFilter implements Filter {
 			}
 			else {
 				personDAO.removePerson(aadhaar);
-				response.getWriter().write("Deleted aadhaar "+ aadhaar);
+				response.getWriter().write("index.html");
 			}
 		}
 	}

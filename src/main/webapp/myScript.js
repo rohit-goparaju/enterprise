@@ -1,20 +1,41 @@
-/**
- * 
- */
-function sendDeletePerson(aadhaar) {
-	let userInput = window.confirm("Are you sure that you want to delete the person ?");
-	if (userInput) {
-		let xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "PersonServlet", true);
-		xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		xhttp.onreadystatechange = function() {
-			if (xhttp.readyState === 4 && xhttp.status === 200) {
-				document.getElementById("deletedMessage").hidden = false;
-				document.getElementById("deletedMessage").innerHTML = xhttp.responseText;
-				document.getElementById("deleteButton").setAttribute("disabled", "true");
-				document.getElementsByClassName("deletable").item(0).setAttribute("hidden", "true");
+$(
+	function(){
+		
+		$("#deleteButton").click(
+			function(){
+				let deleteDelay = 5000;
+				let aadhaar = $("#deleteAadhaar").text();
+				let userConfirmation = window.confirm("Are you sure that you want to delete the aadhaar "+aadhaar+"?");
+				if(userConfirmation){
+					let myData = "deleteRequest=true&aadhaar="+encodeURIComponent(aadhaar);
+					$.ajax(
+						{
+							url : "PersonServlet",
+							type: "POST",
+							data: myData,
+							contentType: "application/x-www-form-urlencoded",
+							success: function(response){
+								$(".deletable").remove();
+								$("#deleteButton").prop("disabled",true).delay(deleteDelay).fadeOut();
+								$("#deletedMessage").removeAttr("hidden").fadeIn().delay(deleteDelay).fadeOut();
+								
+								setTimeout(function(){
+									$("#"+aadhaar+"record").remove();
+								}, deleteDelay*0.5);
+								
+								setTimeout(function(){
+									window.location.href = response.trim();
+								}, deleteDelay*0.6);
+							},
+							error: function(xhr, status, error){
+								console.log("Error: ", error);
+							}
+						}
+					);
+				}
 			}
-		};
-		xhttp.send("deleteRequest=true&aadhaar=" + encodeURIComponent(aadhaar));
+		);	
+		
+		
 	}
-}
+);
